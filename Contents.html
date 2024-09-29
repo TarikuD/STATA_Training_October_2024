@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="STATA Data Analysis Training by Dr. Tariku Dejene, College of Development Studies, Addis Ababa University">
+    <title>STATA Data Analysis Training</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        pre {
+            background-color: #e7e7e7;
+            padding: 5px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            padding: 0.1px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+         table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        caption {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Quantitative Data Analysis Using STATA</h1>
+    <h3> By - Tariku Dejene (PhD) </h3>
+    <p>College of Development Studies </p>
+    <p> Addis Ababa University </p> 
+ </header>
+
+<section>
+    <h2>Topics Covered in This Training</h2>
+    <ul>
+        <li><strong>Data Management in STATA</strong>: Importing data, cleaning data, creating new variables, and labeling variables.</li>
+        <li><strong>Descriptive Statistics</strong>:
+            <ul>
+                <li>Frequency tables</li>
+                <li>Summarizing data using mean, median, and standard deviation</li>
+                <li>Histograms, bar charts, and pie charts</li>
+
+            </ul>
+        </li>
+        <li><strong>Hypothesis Testing</strong>:
+            <ul>
+                <li>Test of means (t-test)</li>
+                <li>Proportion tests</li>
+                <li>Chi-square tests</li>
+            </ul>
+        </li>
+        <li><strong>Linear Regression Analysis</strong>:
+            <ul>
+                <li>Simple linear regression model</li>
+                <li>Multiple regression analysis</li>
+                <li>Interaction terms and their interpretation</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+
+<section>
+    <h2>Introduction</h2>
+  <p> <b>STATA is a statistical software designed for: </b></p>
+<ul>
+    <li>Data manipulation or manage data,</li>
+    <li>Graphics or data visualization, and</li>
+    <li>Conduct data analysis.</li>
+</ul>
+
+<div class="highlight">
+<p>To launch STATA, go to the start menu and find STATA from the list of programs installed on your computer and click on it. <p>
+    [<b>Note:Software installation steps will be shown to participants during the actual training session</b>]</p>
+</div>
+
+<p>STATA has different windows including:</p>
+    <ul>
+        <li><b>Command Window</b>: Where commands are entered</li>
+        <li><b>Results Window</b>: Displays the output of commands</li>
+        <li><b>Review Window</b>: Shows a history of commands</li>
+        <li><b>Variable Window</b>: Lists the dataset variables</li>
+        <li><b>Properties Window</b>: Shows the properties of variables</li>
+    </ul>
+    <img src="STATA Window.png" width="700" height="500" alt="STATA Windows">
+
+</section>
+
+<section>
+    <h2>Flavors of STATA </h2>
+<p> <b>STATA 17 comes in different flavors: </b></p>
+<ul>
+    <li>Basic edition (Stata/BE),</li>
+    <li>Special edition (Stata/SE), and</li>
+    <li>Multiprocessor (Stata/MP).</li>
+</ul>
+<p>To explore the features of different STATA flavors, for instance, type the command:</p>
+    <pre><code>help limits</code></pre>
+    <p>This command shows the capacities of Stata/BE, Stata/MP, and Stata/SE. </p>
+    
+    <img src="flavors.png" alt="Flavors of STATA 17">
+</section>
+
+<section>
+    <h2>Basic Commands</h2>
+ <h2>1. <span class="command">help</span></h2>
+<p>The <code>help</code> command provides access to STATA's built-in help documentation. It's useful when you need to learn more about a specific command or feature.</p>
+<pre><code>help summarize</code></pre>
+<p>This will display help for the <code>summarize</code> command.</p>
+
+<h2>2. <span class="command">search</span></h2>
+<p>The <code>search</code> command looks for specific information within the STATA help files and other resources. It's broader than <code>help</code>.</p>
+<pre><code>search regression</code></pre>
+<p>STATA will return results related to regression commands and topics.</p>   
+
+</section>
+
+
+
+<section>
+<h2>3. <span class="command">pwd</span></h2>
+<p>The <code>pwd</code> command prints the current working directory. It's useful to know where STATA is currently looking for files.</p>
+<pre><code>pwd</code></pre>
+<p>This will output something like <code>C:/Users/YourName/Documents/STATA/</code>.</p>
+
+<h2>4. <span class="command">cd</span></h2>
+<p>Use <code>cd</code> to change the current working directory in STATA. This is important when you want STATA to look in a different folder for data files.</p>
+<pre><code>cd “C:\Users\user1\Desktop\STATA Training” </code></pre>
+    
+</section>
+
+<section>
+<h2>5. <span class="command">import</span></h2>
+<p>STATA can import data from different file formats using the <code>import</code> command. For instance, to import an Excel file:</p>
+<pre><code>import excel "hh_91.xls", sheet("Sheet1") firstrow</code></pre>
+<p>This imports data from "Sheet1" of the Excel file and treats the first row as variable names.</p>
+<p>If the data type is of csv format, the data can be imported using the <code>import delimited</code> command:</p>
+<pre><code>import delimited "hh_91.csv"</code></pre>
+<p> If the data type is, however, a STATA data type (.dta), the <code>use</code> command  should be used to open the files.</p>
+<pre><code>use "hh_91.dta", clear</code></pre>
+
+<p>To view the summary of the data, the <code>describe</code> command is one option that can be utilized in STATA. The command produces a summary of the dataset in memory or of the data stored in a Stata-format dataset.</p>
+<pre><code>describe</code></pre>
+</section>
+
+<section>
+<h2>6. <span class="command">edit</span></h2>
+<p>The <code>edit</code> command opens the Data Editor in edit mode, allowing you to modify data manually.</p>
+<pre><code>edit</code></pre>
+<p>This opens an interactive window to edit your dataset.</p>
+
+<h2>7. <span class="command">browse</span></h2>
+<p>The <code>browse</code> command opens the Data Editor in read-only mode. You can view, but not change the data.</p>
+<pre><code>browse</code></pre>
+
+</section>
+
+<section>
+<h2>8. <span class="command">merge</span></h2>
+<p>To combine datasets based on one or more key variables, use <code>merge</code>. You can specify whether the merge is 1:1 or 1:many.</p>
+<pre><code>merge 1:1 id using "dataset2.dta"</code></pre>
+<p>This merges two datasets based on the variable <code>id</code>.</p>
+
+<h2>9. <span class="command">append</span></h2>
+<p>Use the <code>append</code> command to add observations from another dataset to the current one. It's like stacking datasets.</p>
+<pre><code>append using "dataset2.dta"</code></pre>
+<p>This adds the rows of <code>dataset2</code> to the current dataset.</p>
+
+</section>
+
+<section>
+<h2>10. <span class="command">generate</span></h2>
+<p>The <code>generate</code> command creates new variables. For instance, to create a new variable for age in months:</p>
+<pre><code>generate age_months = agehead * 12</code></pre>
+
+<h2>11. <span class="command">egen</span></h2>
+<p>The <code>egen</code> command is more advanced than <code>generate</code> and allows for group-level calculations or other complex operations.</p>
+<pre><code>egen mean_fsize = mean(famsize), by(villid)</code></pre>
+<p>This generates the mean family size for each village.</p>
+
+<h2>12. <span class="command">rename</span></h2>
+<p>To change the name of a variable, use <code>rename</code>.</p>
+<pre><code>rename weight samplewt</code></pre>
+<p>This renames the variable <code>weight</code> to <code>samplewt</code>.</p>
+
+</section>
+
+<section>
+<h2>13. <span class="command">drop</span></h2>
+<p>Removes variables or observations from the dataset.</p>
+<pre><code>drop if agehead > 50</code></pre>
+<p>This drops all observations where age is greater than 50.</p>
+
+<h2>14. <span class="command">keep</span></h2>
+<p>Keeps only the specified variables or observations.</p>
+<pre><code>keep if famsize <=15</code></pre>
+<p>This keeps only observations where income is greater than 1000.</p>
+
+<h2>15. <span class="command">clear</span></h2>
+<p>Clears the current dataset from memory. Useful when you want to load new data.</p>
+<pre><code>clear</code></pre>
+
+
+</section>
+
+<section>
+<h2>16. <span class="command">encode</span></h2>
+<p>Converts string variables into numeric categorical variables.</p>
+<pre><code>encode gender, generate(gender_num)</code></pre>
+<p>This converts the string variable <code>gender</code> into a numeric variable <code>gender_num</code>.</p>
+
+<h2>17. <span class="command">decode</span></h2>
+<p>Converts numeric categorical variables back to strings.</p>
+<pre><code>decode gender_num, generate(gender_str)</code></pre>
+<p>This converts the numeric variable <code>gender_num</code> into a string variable <code>gender_str</code>.</p>
+
+<h2>18. <span class="command">replace</span></h2>
+<p>Replaces the values of existing variables.</p>
+<pre><code>replace income = 0 if income < 0</code></pre>
+<p>This replaces negative income values with 0.</p>
+
+
+</section>
+
+
+<section>
+<h2>19. <span class="command">label var</span></h2>
+<p>Attaches a label (up to 80 characters) to a variable.</p>
+<pre><code>label var sexhead "Sex of the household head"</code></pre>
+<p>This replaces the variable description.</p>
+
+<h2>20. <span class="command">label define</span></h2>
+<p>Creates a value label, which is a set of individual numeric values and their corresponding labels. For instance, for <code>sexhead</code>:</p>
+<pre><code>label define sex 1 "Male" 2 "Female"</code></pre>
+<p>This creates the value label named sex.</p>
+
+<h2>21. <span class="command">label val</span></h2>
+<p>Attaches a value label toa variable of your interest. For instance, for <code>sexhead</code>:</p>
+<pre><code>label val sexhead sex </code></pre>
+<p>This attaches the value label named sex to the variable sexhead.</p>
+</section>
+
+<section>
+<table>
+    <caption>Operators in STATA</caption>
+    <thead>
+        <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><</td>
+            <td>Less than</td>
+        </tr>
+        <tr>
+            <td><=</td>
+            <td>Less than or equal</td>
+        </tr>
+        <tr>
+            <td>==</td>
+            <td>Equal</td>
+        </tr>
+        <tr>
+            <td>></td>
+            <td>Greater than</td>
+        </tr>
+        <tr>
+            <td>>=</td>
+            <td>Greater than or equal</td>
+        </tr>
+        <tr>
+            <td>!</td>
+            <td>Not</td>
+        </tr>
+        <tr>
+            <td>~</td>
+            <td>Not</td>
+        </tr>
+        <tr>
+            <td>!=</td>
+            <td>Not equal</td>
+        </tr>
+        <tr>
+            <td>&amp;</td>
+            <td>And</td>
+        </tr>
+        <tr>
+            <td>|</td>
+            <td>Or</td>
+        </tr>
+        <tr>
+            <td>+</td>
+            <td>Addition</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>Subtraction</td>
+        </tr>
+        <tr>
+            <td>*</td>
+            <td>Multiplication</td>
+        </tr>
+        <tr>
+            <td>/</td>
+            <td>Division</td>
+        </tr>
+        <tr>
+            <td>^</td>
+            <td>Power</td>
+        </tr>
+    </tbody>
+</table>
+
+
+</section>
+
+<section>
+    <h2>Descriptive Statistics</h2>
+<p>For <b>categorical variables</b>, <code>tab1</code>, <code>tab2</code>, and <code>tabulate</code> commands can be used to produce one way and two frequency tables. </p> 
+
+<p><code>tab1</code> produces a one-way tabulation for each variable specified after the command.</p>
+<p><code>tab2</code> produces all possible two-way tabulations of the variables specified after the command.<p>
+Example: The following lines of codes produce different results:
+<pre><code>tab1 sexhead vaccess</code> </pre>
+    <img src="tab1.png" alt="One-way table">
+<pre><code>tab2 sexhead vaccess</code> </pre>
+    <img src="tab2.png" alt="Two-way table">
+<pre><code>tab2 sexhead vaccess, col</code> </pre>
+    <img src="tab2c.png" alt="Two-way table with column percent">
+<pre><code>tab2 sexhead vaccess, row</code> </pre>
+    <img src="tab2r.png" alt="Two-way table with row percent">
+
+</section>
+
+
+<section>
+    <h2>Summarizing Numeric Variables</h2>
+For numeric variables, the <code>summarize</code> command calculates and displays a variety of univariate summary statistics. It is used to produce summary measures such as mean, standard deviation, minimum and maximum scores of a quantitative data. For the age and level of education for our data, these measures can be produced as:
+<pre><code>summarize agehead educhead</code> </pre>
+    <img src="summarize.png" alt="Summary measures">
+
+</section>
+
+<section>
+    <h2> Charting Numeric Variables</h2>
+For numeric variables such as age, <b>histrogram</b> can be used to display the distribution pictorially. The command <code>histogram</code> produces the chart. Please note the optional parts of the command (such as title, xlabel, ylabel, xtitle, and ytitle) shown below.
+<pre><code>histogram agehead, frequency title("Distribution of Age") xlabel(15(5)75) ylabel(, grid) xtitle("Age (years)") ytitle("Frequency")</code></pre>
+    <img src="fhist.png" width="500" height="300" alt="Histogram for household head age">
+
+<p>Box plots are useful in summarizing a numeric variable. </p>
+<pre><code>graph box age, title("Boxplot of Age") ytitle("Age")</code></pre>
+    <img src="boxplot.png" width="500" height="300" alt="Boxplot for household head age">
+<p>If you want to produce a horizontal boxplot, you need to use the following command</p>
+<pre><code>graph hbox age, title("Boxplot of Age") xtitle("Age")</code></pre>
+    <img src="hboxplot.png" width="500" height="300" alt="Boxplot for household head age">
+
+</section>
+
+<section>
+        <h2>Density Plots</h2>
+<p>Density plots can also be generated for numeric variables, offering a smooth, continuous curve that eliminates the jagged appearance seen in the histogram above. </p>
+  <pre><code> kdensity exptot, title("Distribution of hh expenditures")</code></pre>   
+    <img src="kdens1.png" width="500" height="300" alt="Density plot for household head age">
+
+<p>Density plots are helpful in making comparisons of distributions across populations or categories. The following graph displays a comparison of the total household expenditure across the sex of the household head</p>
+
+  <pre><code> twoway (kdensity exptot if sexhead==0) ///
+(kdensity exptot if sexhead==1), ///
+title("Distribution of hh expenditures" ///
+ "by sex of the household head") ///
+ytitle("Density") xtitle("HH expenditure") legend(label(1 "Female") label(2 "Male"))</code></pre>  
+    <img src="kdens2.png" width="500" height="300" alt="Density plot for household expenditure">
+
+<p>Another useful way of comparison for distribution across groups is the use of boxplot.</p>
+<pre><code>graph hbox exptot, over(sexhead) title("Total Expenditure by Household Head's Sex") ylabel(, angle(0)) ytitle("Total Expenditure")</code></pre>
+    <img src="mboxplot.png" width="500" height="300" alt="Boxplot for household head age">
+
+</section>
+
+<section>
+    <h2> Charting Categorical Variables</h2>
+For categorica variables such as sex, <b>bar chart</b> can be used to display the distribution pictorially. The command <code>graph bar</code> produces the chart. 
+
+<pre><code>graph bar (count), over(sex) title("Distribution of Sex of the Household Head") ytitle("Number") blabel(bar, position(outside) size(small))</code></pre>
+    <img src="gbar.png" width="500" height="300" alt="Sex of the household head">
+
+<p>Altenatively, a percentage distribution can be plotted on the bar chart instead of counts.</p>
+<pre><code>graph bar (percent), over(sex) title("Distribution of Sex of the Household Head") ytitle("Percent") blabel(bar, position(outside) size(small) format(%4.1f))</code></pre>
+    <img src="gbarp.png" width="500" height="300" alt="Sex of the household head">
+
+<p><b>NOTE</b>: After producing the chart, the chart needs to be saved as either as STATA graph file type or a picture. Shown below is the command you can use to save it as PNG file.</p>
+<pre><code>graph export "gbar.png", as(png) name("Graph")</code></pre>
+
+<p>A pie chart can also be produced for categorical variables. For instance, for sex of the households head:</p>
+<pre><code>graph pie, over(sex) title("Distribution of Sex") plabel(_all percent) legend(on)</code></pre>
+    <img src="gpie.png" width="500" height="300" alt="Sex of the household head">
+
+</section>
+
+<section>
+    <h2>Exporting Descriptive Results to MS Word</h2>
+<p>In STATA 17, <code>table</code> is a flexible command for creating tables of many types - tabulations, tables of summary statistics, tables of regression results, and more. The following lines of codes produce the mean and standard deviations of variables - age, level of education, family size, and land size of the household. The result is then exported to a word file named "MyResult.docx".</p>
+<pre><code>
+putdocx clear
+putdocx begin 
+table (var)()(), statistic(mean agehead educhead famsize hhland) ///
+statistic(sd agehead educhead famsize hhland) nformat(%9.1f) 
+collect style putdocx, title("Table 1: Descriptive Summary Measures")
+putdocx collect 
+putdocx save "MyResult", replace
+</code></pre>
+    <img src="table1.png" width="700" height="300" alt="Exporting Result to MS Word - 1">
+
+<p>It is also possible to export multiple summary tables to MS word. </p>
+
+<pre><code>
+putdocx clear
+putdocx begin 
+table (var)()(), statistic(mean agehead educhead famsize hhland) ///
+statistic(sd agehead educhead famsize hhland) nformat(%9.1f) 
+collect style putdocx, title("Table 1: Descriptive Summary Measures")
+putdocx collect 
+
+table (var)()(), statistic(fvfrequency sexhead vaccess)  ///
+statistic(fvpercent sexhead vaccess) nformat(%9.1f)
+collect style putdocx, title("Table 2: Percent Distributions of  ... ")
+putdocx collect 
+
+putdocx save "MyResult", replace
+</code></pre>
+    <img src="table2.png" width="700" height="300" alt="Exporting Result to MS Word - 1">
+
+</section>
+
+
+
+<!-- <section>
+    <h2>Inferential Statistics</h2>
+<p>In statistics, inference can be made in two ways. One way is estimation, point or interval estimation. Another way of making inference is by testing a hypothesis about a parameter.</p>
+
+
+
+    <pre><code>ttest variable</code></pre>
+    <p>This command tests the hypothesis that the mean of the variable equals a specific value.</p>
+</section> -->
+
+
+<section>
+    
+</section>
+
+<footer>
+    <p>&copy; 2024 Tariku Dejene, Addis Ababa University</p>
+</footer>
+
+</body>
+</html>
