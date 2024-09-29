@@ -474,6 +474,8 @@ putdocx collect
 
 table (var)()(), statistic(fvfrequency sexhead vaccess)  ///
 statistic(fvpercent sexhead vaccess) nformat(%9.1f)
+collect recode result fvfrequency = Number fvpercent = Percent
+collect layout (var) (result[Number Percent])
 collect style putdocx, title("Table 2: Percent Distributions of  ... ")
 putdocx collect 
 
