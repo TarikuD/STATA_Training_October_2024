@@ -95,7 +95,6 @@
             <ul>
                 <li>Test of means (t-test)</li>
                 <li>Proportion tests</li>
-                <li>Chi-square tests</li>
             </ul>
         </li>
         <li><strong>Linear Regression Analysis</strong>:
@@ -486,21 +485,87 @@ putdocx save "MyResult", replace
 </section>
 
 
+<section>
+    <h2>Inferential Statistics - Estimation</h2>
+<p>In statistics, inference can be made in two ways. One way is <b>estimation</b>, point or interval estimation. Another way of making inference is by <b>testing a hypothesis</b> about a parameter.</p>
 
-<!-- <section>
-    <h2>Inferential Statistics</h2>
-<p>In statistics, inference can be made in two ways. One way is estimation, point or interval estimation. Another way of making inference is by testing a hypothesis about a parameter.</p>
+<p>Point and interval estimation for the mean are produced using the command <code>ci means</code>. For instance, for variables family size and household landholding size, the average estimated values - point and 95% confidence interval are estimated as follows:</p>
+<pre><code>ci mean famsize hhland</code></pre>
+    <img src="cimean.png" width="500" height="100" alt="Estimation for means">
 
+<p>Similarly, you can produce the point and interval estimates for proportion of binary variables using the command <code>ci proportion</code>. Accordingly, the point and interval estimates for proportion of accessibility of village by road all year is produced using the following command.</p>
+<pre><code>ci proportion vaccess</code></pre>
+    <img src="ciprop.png" width="500" height="100" alt="Estimation for proportions">
 
+<p>The Wilson interval provides more accurate estimates, especially for proportions that are near 0 or 1. It accounts for the uncertainty in the estimate more effectively than the traditional normal approximation interval. </p>
+<pre><code>ci proportion vaccess</code></pre>
+    <img src="cipropwil.png" width="500" height="100" alt="Estimation for proportions - wilson">
 
-    <pre><code>ttest variable</code></pre>
-    <p>This command tests the hypothesis that the mean of the variable equals a specific value.</p>
-</section> -->
+</section>
 
 
 <section>
-    
+        <h2>Inferential Statistics - Hypothesis Testing</h2>
+<p>Hypothesis testing helps in making informed decisions based on data. Researchers can determine whether to accept or reject a hypothesis about a population parameter. Hypothesis testing allows researchers to evaluate the strength of evidence against a null hypothesis. This is crucial in scientific research where conclusions must be supported by data. </p>
+
+<p>For instance, we may test the hypthesis that the average age of household heads is 35. 
+<pre><code>ttest agehead==35</code></pre>
+    <img src="ttest1.png" width="500" height="200" alt="Single mean test">
+
+<p>The <code>ttest</code> can also be used to test that a variable has the same mean within the two groups defined by groupvar. Similarly, assuming unpaired data, <code>ttest</code> can also be used to test that two variables have the same mean. For comparison of average annual expenditure for male and female headed households, we may specify the command as:</p>
+<pre><code>ttest exptot, by(sexhead)</code></pre>
+    <img src="ttest2.png" width="500" height="200" alt="Comparison of means test">
+
+<p> To conduct a test of proportion in STATA, we use the <code>prtest</code> command. The command can be used for both one sample and two sample situations. For one sample prooprtion test, for instance - to test if proportion of households with access to road all year is 75%, we specify the command as:</p>
+<pre><code>prtest vaccess==0.75</code></pre>
+    <img src="prtest1.png" width="500" height="200" alt="One sample proportion">
+
+<p>For a two sample situation, comparing proportion of two groups - testing if an equal proportion of male and female headed households have access to road all year, specify the command as:</p>
+<pre><code>prtest vaccess, by(sexhead)</code></pre>
+    <img src="prtest2.png" width="500" height="300" alt="Comparison of proportions">
+
 </section>
+
+
+<section>
+        <h2>Correlation and Regression</h2>
+<p>Correlation and regression are both statistical techniques used to analyze relationships between variables, but they serve different purposes and provide different insights. <b>Correlation</b> measures the strength and direction of a linear relationship between two variables. <iIt does not imply causation. <b> Regression</b>, on the other hand, models the relationship between a dependent variable and one or more independent variables. It aims to predict the dependent variable based on the independent variables.</p>
+
+<p> For correlation analysis, either <code>correlate</code> <b>OR</b> <code>pwcorr</code> commands are used in STATA. For instance, the command below produces the correlation matrix for the specified variables.</p>
+<pre><code>correlate exptot agehead educhead famsize hhland hhasset</code></pre>
+    <img src="corr.png" width="500" height="200" alt="Correlation Matrix">
+
+<p>The pearson correlation coefficient assumes normality of variables. Normality tests such as <code>swilk</code> and <code>sfrancia</code> can be used to check normality of variables. In case the variables violate this assumption, an alternative coefficient should be produced such as Spearman's rank correlation coefficient or Kendal's tau.</p>
+
+<pre><code>spearman exptot agehead educhead famsize hhland hhasset</code></pre>
+    <img src="spearman.png" width="500" height="200" alt="SpCorrelation Matrix">
+
+
+</section>
+<section>
+        <h2>Simple and Multiple Linear Regression</h2>
+
+<p>Simple Linear Regression is ideal for understanding the relationship between two variables, while Multiple Linear Regression is used to explore relationships involving several predictors. Simple linear regression analyzes the relationship between two variables by fitting a linear equation to the observed data.</p>
+
+    <img src="SLR.png" width="500" height="200" alt="SLR">
+
+<p>Multiple linear regression extends simple linear regression by analyzing the relationship between one dependent variable and two or more independent variables.</p>
+    <img src="MLR.png" width="500" height="200" alt="MLR">
+
+
+<p>To fit a simple linear regression model for total expenditure with household asset as a predictor:</p>
+<pre><code>regress exptot hhasset</code></pre>
+    <img src="SLR1.png" width="500" height="200" alt="SLR1">
+
+<p> Multiple linear regression model can be fit as follows for the total annual household expenditure:</p>
+<pre><code>reg exptot agehead educhead famsize hhland hhasset</code></pre>
+    <img src="MLR1.png" width="500" height="300" alt="MLR1">
+
+
+
+</section>
+
+
 
 <footer>
     <p>&copy; 2024 Tariku Dejene, Addis Ababa University</p>
